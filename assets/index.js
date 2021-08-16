@@ -82,16 +82,9 @@ function addEventsForEditBtns() {
             const $row = $(this).closest('tr'),
                 $tds = $row.find('td').not(':last');
             let data = [];
-            let isDataComplete = true;
             $.each($tds, function (key, value) {
-                if (value.innerHTML !== "") {
-                    data.push(value.innerHTML);
-                } else {
-                    alert('all data mandatory. try again!');
-                    isDataComplete = false;
-                }
+                data.push(value.innerHTML);
             });
-            if (!isDataComplete) return;
             data = JSON.stringify(data);
             $.ajax({
                 type: "POST",
@@ -118,7 +111,8 @@ function addEventsForEditBtns() {
             $tds = $row.find("td").not(':last,:first');
             $.each($tds, function () {
                 $tds.attr('contenteditable', 'true').css("border-width", "thick");
-            }).focus();s
+            }).focus();
+            s
         }
     });
 // cancel button event
@@ -142,7 +136,7 @@ function addEventsForEditBtns() {
             $.ajax({
                 type: "POST",
                 url: 'getDeleteCustomerResponse.php',
-                dataType:'json',
+                dataType: 'json',
                 data: {data: $customerID},
                 success: function (response) {
                     alert(response);
@@ -152,9 +146,8 @@ function addEventsForEditBtns() {
             $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
             $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
             $('.saveCustomerBtn').text("Modify").removeClass('saveCustomerBtn');
-        }
-        else {
-            alert ('not deleted');
+        } else {
+            alert('not deleted');
         }
     });
 

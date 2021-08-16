@@ -34,7 +34,7 @@ if ((isset($_POST['name'])
         $customerID = $stmt->fetch();
         $sql3 = "INSERT INTO Notes (note, customer_id) VALUES('" . $note . "', '" . $customerID['customer_id'] . "')";
         $conn->exec($sql3);
-        echo json_encode('details has been saved');
+        echo json_encode("details has been saved!");
     } catch (PDOException $e) {
         echo json_encode($e->getMessage());
     }

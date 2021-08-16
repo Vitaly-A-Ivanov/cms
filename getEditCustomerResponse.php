@@ -30,7 +30,7 @@ WHERE c.customer_id = n.customer_id
 AND     c.customer_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$name, $surname, $address, $telephone, $email, $gender, $note, $id]);
-        echo json_encode('details has been updated');
+        echo json_encode("details has been updated for Customer with ID = '$id'");
     } catch (PDOException $e) {
         echo json_encode($e->getMessage());
     }
