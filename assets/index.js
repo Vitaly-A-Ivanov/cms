@@ -49,8 +49,6 @@ $(document).ready(function () {
 function createTable(data) {
     $('.table tbody').empty();
     $.each(data, function (index, value) {
-        let note = value['note'];
-        if (typeof note === 'undefined') note = 'n/a';
         $('.table tbody').append(
             '<tr><td>' + value['customer_id'] +
             '</td><td>' + value['name'] +
@@ -59,7 +57,7 @@ function createTable(data) {
             '</td><td>' + value['telephone'] +
             '</td><td>' + value['email'] +
             '</td><td>' + value['gender'] +
-            '</td><td>' + note
+            '</td><td>' + value['note']
         );
         // block of buttons to modify customer info
         $('tbody tr:last-child').append(
