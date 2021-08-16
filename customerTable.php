@@ -15,7 +15,7 @@ $results = $query->fetchAll();
     <h3> Our Customers</h3>
 </div>
 <form class="form-inline my-2 my-lg-0 pb-3 " id="searchForm">
-    <input class="form-control mr-sm-2" id="searchField" name="searchField" type="search" placeholder="Search"
+    <input class="form-control mr-sm-2" id="searchField" name="searchField" type="search" placeholder="Enter ID or Email"
            aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
