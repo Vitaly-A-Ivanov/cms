@@ -65,7 +65,8 @@ function createTable(data) {
         $('tbody tr:last-child').append(
             $("<td class='d-flex justify-content-around'>" +
                 "<button type=\"button\" class=\" btn btn-primary btn-sm editCustomerBtn\">Modify</button>" +
-                "<button type=\"button\" class=\" btn btn-danger btn-sm cancelCustomerBtn d-none\">Cancel</button>" +
+                "<button type=\"button\" class=\" btn btn-warning btn-sm cancelCustomerBtn d-none\">Cancel</button>" +
+                "<button type=\"button\" class=\" btn btn-danger btn-sm deleteCustomerBtn d-none\">Delete</button>" +
                 "</td>")
         );
 
@@ -75,6 +76,7 @@ function createTable(data) {
 
 // appends event listeners to modify, save and cancel buttons in the edit column
 function addEventsForEditBtns() {
+    // modify button event
     $('.editCustomerBtn').on('click', function () {
         if ($(this).hasClass('saveCustomerBtn')) {
             const $row = $(this).closest('tr'),
@@ -103,30 +105,57 @@ function addEventsForEditBtns() {
             });
             $(this).text("Modify").removeClass('saveCustomerBtn');
             $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
+            $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
             $.each($tds, function () {
-                $tds.attr('contenteditable', 'false').css({});
+                $tds.attr('contenteditable', 'false').css("border-width", "thin");
             });
+
         } else {
             $(this).text("Save").addClass('saveCustomerBtn');
             $('.cancelCustomerBtn').addClass('d-block').removeClass('d-none');
+            $('.deleteCustomerBtn').addClass('d-block').removeClass('d-none');
             const $row = $(this).closest('tr');
-            $tds = $row.find("td").not(':last');
+            $tds = $row.find("td").not(':last,:first');
             $.each($tds, function () {
-                $tds.attr('contenteditable', 'true').css({});
-            });
+                $tds.attr('contenteditable', 'true').css("border-width", "thick");
+            }).focus();s
         }
     });
-
+// cancel button event
     $('.cancelCustomerBtn').on('click', function () {
         const $row = $(this).closest('tr'),
             $tds = $row.find("td").not(':last');
         $.each($tds, function () {
-            $tds.attr('contenteditable', 'false').css({});
+            $tds.attr('contenteditable', 'false').css("border-width", "thin");
 
         });
 
         $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
+        $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
         $('.saveCustomerBtn').text("Modify").removeClass('saveCustomerBtn');
+    });
+// delete button event
+    $('.deleteCustomerBtn').on('click', function () {
+        const $row = $(this).closest('tr');
+        const $customerID = $row.find("td:eq(0)").text();
+        if ($customerID !== null) {
+            $.ajax({
+                type: "POST",
+                url: 'getDeleteCustomerResponse.php',
+                dataType:'json',
+                data: {data: $customerID},
+                success: function (response) {
+                    alert(response);
+                },
+            });
+            $(this).closest('tr').remove();
+            $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
+            $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
+            $('.saveCustomerBtn').text("Modify").removeClass('saveCustomerBtn');
+        }
+        else {
+            alert ('not deleted');
+        }
     });
 
 }

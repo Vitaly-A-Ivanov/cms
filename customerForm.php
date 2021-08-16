@@ -3,29 +3,29 @@
 </div>
 <form method="post" action="" id="customerForm">
     <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Forename" autofocus="">
+        <input type="text" class="form-control" name="name" placeholder="Forename" autofocus="" required>
 
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" name="surname" placeholder="Surname" autofocus="">
+        <input type="text" class="form-control" name="surname" placeholder="Surname" autofocus="" required>
 
     </div>
     <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Email">
+        <input type="email" class="form-control" name="email" placeholder="Email" required>
 
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" name="address" placeholder="Address">
+        <input type="text" class="form-control" name="address" placeholder="Address" required>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" name="telephone" placeholder="Phone number">
+        <input type="text" class="form-control" name="telephone" placeholder="Phone number" required>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text"
                    for="inputGroupSelect01">Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         </div>
-        <select class="custom-select" id="inputGroupSelect01" name="gender">
+        <select class="custom-select" id="inputGroupSelect01" name="gender" required>
             <option selected>Choose...</option>
             <option value="1">Male</option>
             <option value="2">Female</option>
