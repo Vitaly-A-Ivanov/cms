@@ -51,7 +51,7 @@ $results = $query->fetchAll();
                   <td>' . $row['telephone'] . '</td> 
                   <td>' . $row['email'] . '</td> 
                   <td>' . $row['gender'] . '</td>
-                  <td>' . $note . '</td> 
+                  <td>' . nl2br($note\n) . '</td> 
                   <td class="d-flex justify-content-around">
                       <button type="button" class=" btn btn-primary btn-sm editCustomerBtn">Modify</button>
                       <button type="button" class=" btn btn-warning btn-sm cancelCustomerBtn d-none">Cancel</button>
