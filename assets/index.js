@@ -78,7 +78,8 @@ function addEventsForEditBtns() {
     $('.editCustomerBtn').on('click', function () {
         if ($(this).hasClass('saveCustomerBtn')) {
             const $row = $(this).closest('tr'),
-                $tds = $row.find('td').not(':last');
+                $tds = $row.find('td').not(':last'),
+                $btns = $row.find("button");
             let data = [];
             $.each($tds, function (key, value) {
                 data.push(value.innerHTML);
@@ -95,41 +96,55 @@ function addEventsForEditBtns() {
                 },
             });
             $(this).text("Modify").removeClass('saveCustomerBtn');
-            $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
-            $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
+            // $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
+            // $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
             $.each($tds, function () {
                 $tds.attr('contenteditable', 'false').css("border-width", "thin");
+            });
+            $.each($btns, function () {
+                if($(this).hasClass('hideBtn')) {
+                    $(this).addClass('d-none').removeClass('d-block');
+                }
             });
 
         } else {
             $(this).text("Save").addClass('saveCustomerBtn');
-            $('.cancelCustomerBtn').addClass('d-block').removeClass('d-none');
-            $('.deleteCustomerBtn').addClass('d-block').removeClass('d-none');
-            const $row = $(this).closest('tr');
-            $tds = $row.find("td").not(':last,:first');
+            // $('.cancelCustomerBtn').addClass('d-block').removeClass('d-none');
+            // $('.deleteCustomerBtn').addClass('d-block').removeClass('d-none');
+            const $row = $(this).closest('tr'),
+                $tds = $row.find("td").not(':last,:first'),
+                $btns = $row.find("button");
             $.each($tds, function () {
                 $tds.attr('contenteditable', 'true').css("border-width", "thick");
             }).focus();
-            s
+            $.each($btns, function () {
+              if($(this).hasClass('hideBtn')){
+                  $(this).addClass('d-block').removeClass('d-none');
+              }
+            });
+
         }
     });
 // cancel button event
     $('.cancelCustomerBtn').on('click', function () {
         const $row = $(this).closest('tr'),
-            $tds = $row.find("td").not(':last');
+            $tds = $row.find("td").not(':last'),
+            $btns = $row.find("button");
         $.each($tds, function () {
             $tds.attr('contenteditable', 'false').css("border-width", "thin");
-
         });
-
-        $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
-        $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
+        $.each($btns, function () {
+            if($(this).hasClass('hideBtn')){
+                $(this).addClass('d-none').removeClass('d-block');
+            }
+        });
         $('.saveCustomerBtn').text("Modify").removeClass('saveCustomerBtn');
     });
 // delete button event
     $('.deleteCustomerBtn').on('click', function () {
-        const $row = $(this).closest('tr');
-        const $customerID = $row.find("td:eq(0)").text();
+        const $row = $(this).closest('tr'),
+        $customerID = $row.find("td:eq(0)").text(),
+            $btns = $row.find("button");
         if ($customerID !== null) {
             $.ajax({
                 type: "POST",
@@ -141,8 +156,11 @@ function addEventsForEditBtns() {
                 },
             });
             $(this).closest('tr').remove();
-            $('.cancelCustomerBtn').addClass('d-none').removeClass('d-block');
-            $('.deleteCustomerBtn').addClass('d-none').removeClass('d-block');
+            $.each($btns, function () {
+                if($(this).hasClass('hideBtn')){
+                    $(this).addClass('d-none').removeClass('d-block');
+                }
+            });
             $('.saveCustomerBtn').text("Modify").removeClass('saveCustomerBtn');
         } else {
             alert('not deleted');
