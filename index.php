@@ -111,6 +111,17 @@
             background-color: #f9f9f9;
         }
 
+        ::-webkit-input-placeholder {
+            font-size: 13px!important;
+        }
+
+        :-moz-placeholder { /* Firefox 18- */
+            font-size: 13px!important;
+        }
+        ::-moz-placeholder {  /* Firefox 19+ */
+            font-size: 13px!important;
+        }
+
 
     </style>
 

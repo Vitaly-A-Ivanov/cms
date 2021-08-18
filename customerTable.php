@@ -14,10 +14,10 @@ $results = $query->fetchAll();
 <div class="title mb-4">
     <h3> Our Customers</h3>
 </div>
-<form class="form-inline my-2 my-lg-0 pb-3 " id="searchForm">
+<form class="form-inline my-2 my-lg-0 pb-3 flex-nowrap" id="searchForm">
     <input class="form-control mr-sm-2" id="searchField" name="searchField" type="search" placeholder="Customer name or Email"
            aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <button class="btn btn-outline-success my-2 my-sm-0 ml-1" type="submit">Search</button>
 </form>
 <div class="table_wrapper">
     <table class="table">
