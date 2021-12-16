@@ -12,3 +12,7 @@ try {
 // The PDO constructor throws an exception if it fails
     die('Error Connecting to Database: ' . $e->getMessage());
 }
+
+
+
+// hello test

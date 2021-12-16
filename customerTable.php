@@ -23,7 +23,7 @@ $results = $query->fetchAll();
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>NEW ID</th>
             <th>Name</th>
             <th>Surname</th>
             <th>Address</th>
